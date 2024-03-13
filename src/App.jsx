@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import Courses from './Components/Courses/Courses';
 import PriceCart from './Components/PriceCart/PriceCart';
- export const totalCourse = 15;
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+export const totalCourse = 15;
 function App() {
   const [selectedCourse, setSelectedCourse] = useState([]);
   const handleSelectBtn = course => {
@@ -9,19 +12,19 @@ function App() {
       element => element.id === course.id
     );
     const totalCredit = selectedCourse.reduce((p, c) => p + c.credit, 0);
-    console.log(totalCredit);
     if (totalCredit + course.credit > totalCourse) {
-      return alert(`Only ${totalCourse} credit hour is allowed`)
+      return toast.warn(`Only ${totalCourse} credit  is allowed`);
     }
-      if (!alreadyExist) {
-        const allCourse = [...selectedCourse, course];
-        setSelectedCourse(allCourse);
-      } else {
-        alert('Course already exists');
-      }
+    if (!alreadyExist) {
+      toast.success(`Course "${course.name}" added successfully`);
+      const allCourse = [...selectedCourse, course];
+      setSelectedCourse(allCourse);
+    } else {
+      toast.info(`Course "${course.name}" already exists`);
+    }
   };
   return (
-    <>
+    <div>
       <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-center text-white bg-gray-900 py-4 mt-10">
         Course Registration
       </h1>
@@ -33,7 +36,8 @@ function App() {
           <PriceCart selectedCourse={selectedCourse}></PriceCart>
         </div>
       </div>
-    </>
+      <ToastContainer />
+    </div>
   );
 }
 

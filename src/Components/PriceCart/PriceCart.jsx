@@ -15,7 +15,13 @@ function PriceCat({ selectedCourse }) {
             </li>
           ))}
         </p>
-      </div>
+      </div> <hr />
+      <div>
+        <h3 className="text-base font-medium text-[#1C1B1BCC]">
+          Total Price : {selectedCourse.reduce((p, c) => p + c.price, 0)}{' '}
+          hour
+        </h3>
+      </div> <hr />
       <div>
         <h3 className="text-base font-medium text-[#1C1B1BCC]">
           Total Credit Hour : {selectedCourse.reduce((p, c) => p + c.credit, 0)}{' '}
