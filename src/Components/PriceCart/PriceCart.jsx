@@ -1,8 +1,10 @@
+import { totalCourse } from "../../App";
 function PriceCat({ selectedCourse }) {
   return (
     <div className="p-4 bg-[#ffffff] rounded-lg space-y-3">
       <h3 className="text-lg font-bold text-[#2F80ED]">
-        Credit Hour Remaining 7 hr
+        Credit Hour Remaining :{' '}
+        {totalCourse - selectedCourse.reduce((p, c) => p + c.credit, 0)} hour
       </h3>
       <div>
         <h3 className="text-xl font-bold text-[#1C1B1B]">Course Name: </h3>
@@ -16,8 +18,8 @@ function PriceCat({ selectedCourse }) {
       </div>
       <div>
         <h3 className="text-base font-medium text-[#1C1B1BCC]">
-          Total Credit Hour :{' '}
-          {selectedCourse.reduce((p, c) =>p + c.credit,0)} hour
+          Total Credit Hour : {selectedCourse.reduce((p, c) => p + c.credit, 0)}{' '}
+          hour
         </h3>
       </div>
     </div>

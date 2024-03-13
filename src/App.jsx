@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import Courses from './Components/Courses/Courses';
 import PriceCart from './Components/PriceCart/PriceCart';
+ export const totalCourse = 15;
 function App() {
   const [selectedCourse, setSelectedCourse] = useState([]);
   const handleSelectBtn = course => {
     const alreadyExist = selectedCourse.find(
       element => element.id === course.id
     );
-    if (!alreadyExist) {
-      const allCourse = [...selectedCourse, course];
-      setSelectedCourse(allCourse);
+    const totalCredit = selectedCourse.reduce((p, c) => p + c.credit, 0);
+    console.log(totalCredit);
+    if (totalCredit + course.credit > totalCourse) {
+      return alert(`Only ${totalCourse} credit hour is allowed`)
     }
-    else {
-      alert("Course already exists");
-    }
+      if (!alreadyExist) {
+        const allCourse = [...selectedCourse, course];
+        setSelectedCourse(allCourse);
+      } else {
+        alert('Course already exists');
+      }
   };
   return (
     <>
